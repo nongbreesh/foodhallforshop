@@ -5,7 +5,7 @@ android {
     buildToolsVersion '25.0.2'
 
     defaultConfig {
-        applicationId "com.servewellsolution.app.foodhallforshop"
+        applicationId "com.servewellsolution.app.bananaleaf"
         minSdkVersion 15
         targetSdkVersion 25
         versionCode 13
