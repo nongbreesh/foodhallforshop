@@ -174,14 +174,14 @@ public class LoginActivity extends Activity {
                     } catch (ClientProtocolException e) {
                         // TODO Auto-generated catch block
                         Toast.makeText(getBaseContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                        dialog.hide();
+                        dialog.dismiss();
                     } catch (IOException e) {
                         // TODO Auto-generated catch block
                         Toast.makeText(getBaseContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                        dialog.hide();
+                        dialog.dismiss();
                     } catch (JSONException e) {
                         e.printStackTrace();
-                        dialog.hide();
+                        dialog.dismiss();
                     }
 
 //

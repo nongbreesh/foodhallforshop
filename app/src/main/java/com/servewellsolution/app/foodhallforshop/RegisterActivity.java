@@ -155,7 +155,7 @@ public class RegisterActivity extends Activity {
             @Override
             protected void onPostExecute(Void result) {
 
-                dialog.hide();
+                dialog.dismiss();
                 Toast.makeText(getBaseContext(), "สมัครสมาชิกเรียบร้อยแล้วกรุณาล๊อกอินเข้าสู่ระบบ", Toast.LENGTH_SHORT).show();
 
                 new Handler().postDelayed(new Runnable() {

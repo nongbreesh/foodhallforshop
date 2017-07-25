@@ -2,10 +2,12 @@ package com.servewellsolution.app.foodhallforshop;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -22,15 +24,21 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.io.IOException;
+import java.util.EmptyStackException;
 import java.util.List;
 import java.util.Locale;
 
-public class Mapsetting extends AppCompatActivity implements OnMapReadyCallback {
+import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.EasyPermissions;
 
+public class Mapsetting extends AppCompatActivity implements OnMapReadyCallback, EasyPermissions.PermissionCallbacks {
+
+    private static final int LOCATION = 1;
     private GoogleMap gmap;
     private TextView txtaddress;
     private boolean isMapLoad = false;
     private FrameLayout btn_saveloc;
+    private MapFragment mapFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,9 +62,18 @@ public class Mapsetting extends AppCompatActivity implements OnMapReadyCallback 
 
 
         this.txtaddress = (TextView) findViewById(R.id.txtaddress);
-        MapFragment mapFragment = (MapFragment) getFragmentManager()
+        this.mapFragment = (MapFragment) getFragmentManager()
                 .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            methodRequiresTwoPermission();
+        }
+        else{
+            this.mapFragment.getMapAsync(this);
+        }
+
+
+
 
 
         this.btn_saveloc = (FrameLayout) findViewById(R.id.btn_saveloc);
@@ -77,6 +94,19 @@ public class Mapsetting extends AppCompatActivity implements OnMapReadyCallback 
         finish();
     }
 
+    @AfterPermissionGranted(LOCATION)
+    private boolean methodRequiresTwoPermission() {
+        String[] perms = {android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION};
+        if (EasyPermissions.hasPermissions(this, perms)) {
+            return true;
+        } else {
+            // Do not have permissions, request them now
+            EasyPermissions.requestPermissions(this, "Foodhall ขออนุญาติการใช้งานการระบุตำแหน่ง",
+                    LOCATION, perms);
+        }
+        return false;
+    }
+
     @Override
     public void onMapReady(GoogleMap map) {
         gmap = map;
@@ -95,8 +125,8 @@ public class Mapsetting extends AppCompatActivity implements OnMapReadyCallback 
             }
         });
 
-
         gmap.setMyLocationEnabled(true);
+
         gmap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
             @Override
             public void onMyLocationChange(Location arg0) {
@@ -142,4 +172,13 @@ public class Mapsetting extends AppCompatActivity implements OnMapReadyCallback 
     }
 
 
+    @Override
+    public void onPermissionsGranted(int requestCode, List<String> perms) {
+        this.mapFragment.getMapAsync(this);
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, List<String> perms) {
+        super.onBackPressed();
+    }
 }

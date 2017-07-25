@@ -97,7 +97,7 @@ public class FogotPassword extends Activity {
             @Override
             protected void onPostExecute(Void result) {
 
-                dialog.hide();
+                dialog.dismiss();
                 Toast.makeText(getBaseContext(), "ส่งรหัสผ่านใหม่ให้ทางอีเมลล์เรียบร้อยแล้ว กรุณาตรวจสอบ", Toast.LENGTH_SHORT).show();
 
                 new Handler().postDelayed(new Runnable() {

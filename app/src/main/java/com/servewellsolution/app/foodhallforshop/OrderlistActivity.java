@@ -65,7 +65,7 @@ public class OrderlistActivity extends AppCompatActivity {
     private OrderlistAdapter listAdpt;
     private ListView listview;
     private SwipeRefreshLayout mSwipeRefreshLayout;
-    //RelativeLayout id_nothingmsg;
+    private RelativeLayout id_nothingmsg;
     private HashMap<String, String> userdetail;
     private String orderdetailjson;
     private LinearLayout linlaHeaderProgress;
@@ -92,7 +92,7 @@ public class OrderlistActivity extends AppCompatActivity {
         });
 
 
-        //this.id_nothingmsg = (RelativeLayout) this.findViewById(R.id.id_nothingmsg);
+        this.id_nothingmsg = (RelativeLayout) this.findViewById(R.id.id_nothingmsg);
         this.linlaHeaderProgress = (LinearLayout) this.findViewById(R.id.linlaHeaderProgress);
         SessionManagement sess = new SessionManagement(getBaseContext());
         this.userdetail = sess.getUserDetails();
@@ -124,11 +124,11 @@ public class OrderlistActivity extends AppCompatActivity {
     }
 
     private void bindList() {
-//        if (this.sList.size() > 0) {
-//            this.id_nothingmsg.setVisibility(View.GONE);
-//        } else {
-//            this.id_nothingmsg.setVisibility(View.VISIBLE);
-//        }
+        if (this.sList.size() > 0) {
+            this.id_nothingmsg.setVisibility(View.GONE);
+        } else {
+            this.id_nothingmsg.setVisibility(View.VISIBLE);
+        }
         this.listAdpt = new OrderlistAdapter(this, this.sList, this.userdetail, this);
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.abc_fade_in);
         this.listview.startAnimation(animation);

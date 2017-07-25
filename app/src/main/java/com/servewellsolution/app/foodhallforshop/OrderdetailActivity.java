@@ -68,6 +68,7 @@ import static com.servewellsolution.app.foodhallforshop.SessionManagement.PREF_N
 public class OrderdetailActivity extends AppCompatActivity implements OnMapReadyCallback, EasyPermissions.PermissionCallbacks {
 
     private static final int LOCATION = 1;
+    private static final int PHONE = 2;
     private GoogleMap gmap;
     private static Double lat;
     private static Double lng;
@@ -101,7 +102,10 @@ public class OrderdetailActivity extends AppCompatActivity implements OnMapReady
                 try {
                     Intent callIntent = new Intent(Intent.ACTION_CALL);
                     callIntent.setData(Uri.parse("tel:" + phoneno));
-                    this.startActivity(callIntent);
+                    if (methodRequiresPhonePermission()) {
+                        this.startActivity(callIntent);
+                    }
+
                 } catch (ActivityNotFoundException activityException) {
                     Log.e("Calling a Phone Number", "Call failed", activityException);
                 }
@@ -270,11 +274,18 @@ public class OrderdetailActivity extends AppCompatActivity implements OnMapReady
         }
 
 
+
+
+
     }
 
     private void setting() {
-        this.mapFragment.getMapAsync(this);
-
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            methodRequiresTwoPermission();
+        }
+        else{
+            this.mapFragment.getMapAsync(this);
+        }
     }
 
     private void acceptorder() {
@@ -426,6 +437,19 @@ public class OrderdetailActivity extends AppCompatActivity implements OnMapReady
 
     }
 
+    @AfterPermissionGranted(PHONE)
+    private boolean methodRequiresPhonePermission() {
+        String[] perms = {android.Manifest.permission.CALL_PHONE};
+        if (EasyPermissions.hasPermissions(this, perms)) {
+            return true;
+        } else {
+            // Do not have permissions, request them now
+            EasyPermissions.requestPermissions(this, "Foodhall ขออนุญาติการใช้งานการโทรออก",
+                    PHONE, perms);
+        }
+        return false;
+    }
+
 
     @AfterPermissionGranted(LOCATION)
     private boolean methodRequiresTwoPermission() {
@@ -434,7 +458,7 @@ public class OrderdetailActivity extends AppCompatActivity implements OnMapReady
             return true;
         } else {
             // Do not have permissions, request them now
-            EasyPermissions.requestPermissions(this, "",
+            EasyPermissions.requestPermissions(this, "Foodhall ขออนุญาติการใช้งานการระบุตำแหน่ง",
                     LOCATION, perms);
         }
         return false;
@@ -446,10 +470,7 @@ public class OrderdetailActivity extends AppCompatActivity implements OnMapReady
         gmap = map;
 
 
-        if (methodRequiresTwoPermission()) {
-            //gmap.setMyLocationEnabled(true);
-        }
-
+        gmap.setMyLocationEnabled(true);
 
         gmap.getUiSettings().setScrollGesturesEnabled(false);
         gmarker = gmap.addMarker(new MarkerOptions()
@@ -471,7 +492,7 @@ public class OrderdetailActivity extends AppCompatActivity implements OnMapReady
 
     @Override
     public void onPermissionsGranted(int requestCode, List<String> perms) {
-
+        gmap.setMyLocationEnabled(true);
     }
 
     @Override
