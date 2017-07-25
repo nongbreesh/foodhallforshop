@@ -1,0 +1,154 @@
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    android:fitsSystemWindows="true">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimaryDark"
+        app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:background="@color/colorPrimaryDark"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
+
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:background="@color/colorPrimaryDark" >
+
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/id_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/id_appicon"
+                android:layout_marginTop="30dp"
+                android:textColor="#fff">
+
+                <EditText
+                    android:id="@+id/txtemail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="อีเมลล์"
+                    android:inputType="textEmailAddress"
+                    android:singleLine="true"
+                    android:textColor="#fff"
+                    android:textColorHint="#fff" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/id_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/id_email"
+                android:layout_marginTop="20dp"
+                android:textColor="#fff">
+
+                <EditText
+                    android:id="@+id/txtpassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="รหัสผ่าน (Password)"
+                    android:inputType="textPassword"
+                    android:singleLine="true"
+                    android:textColor="#fff"
+                    android:textColorHint="#fff" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/id_password2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/id_password"
+                android:layout_marginTop="20dp"
+                android:textColor="#fff">
+
+                <EditText
+                    android:id="@+id/txtpassword2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="ยืนยันรหัสผ่าน (Password)"
+                    android:inputType="textPassword"
+                    android:singleLine="true"
+                    android:textColor="#fff"
+                    android:textColorHint="#fff" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/id_tel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/id_password2"
+                android:layout_marginTop="20dp"
+                android:textColor="#fff">
+
+                <EditText
+                    android:id="@+id/txttel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="เบอร์โทรศัพท์"
+                    android:inputType="phone"
+                    android:singleLine="true"
+                    android:textColor="#fff"
+                    android:textColorHint="#fff" />
+
+            </android.support.design.widget.TextInputLayout>
+
+
+            <Button
+                android:id="@+id/id_submit_button"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/id_tel"
+                android:layout_marginTop="25dp"
+                android:backgroundTint="@color/colorFab"
+                android:padding="12dp"
+                android:text="ยืนยันการสมัคร"
+                android:textColor="#fff"
+                android:textSize="24dp" />
+
+            <TextView
+                android:id="@+id/linklogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/id_submit_button"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="45dp"
+                android:gravity="center"
+                android:text="ล๊อคอินเข้าสู่ระบบ"
+                android:textColor="#ffffff"
+                android:textSize="18dp" />
+
+
+            <TextView
+                android:id="@+id/linkforogtpassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/linklogin"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="45dp"
+                android:gravity="center"
+                android:text="ลืมรหัสผ่าน?"
+                android:textColor="#ffffff"
+                android:textSize="18dp" />
+
+        </RelativeLayout>
+    </ScrollView>
+</android.support.design.widget.CoordinatorLayout>

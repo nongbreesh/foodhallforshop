@@ -1,0 +1,102 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F9F8F8"
+    android:paddingTop="30dp">
+
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/id_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:hintTextAppearance="@android:style/TextAppearance.Medium">
+
+        <EditText
+            android:id="@+id/txttitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="ชื่อรายการอาหาร"
+            android:singleLine="true" />
+
+    </android.support.design.widget.TextInputLayout>
+
+
+    <LinearLayout
+        android:id="@+id/frameupload"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/id_price"
+        android:layout_marginTop="32dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:text="รูปภาพ"
+            android:textSize="18dp" />
+
+        <FrameLayout
+            android:id="@+id/frameimagetemp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="8dp"
+            android:background="@drawable/bg_dotted">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:background="@drawable/ic_add_grey" />
+        </FrameLayout>
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/id_submit_button"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/frameupload"
+        android:backgroundTint="#3a7ee6"
+        android:padding="12dp"
+        android:text="บันทึก / แก้ไข"
+        android:textColor="#fff"
+        android:textSize="24dp" />
+
+
+    <Button
+        android:id="@+id/id_remove_button"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/id_submit_button"
+        android:backgroundTint="#b3ff0000"
+        android:visibility="gone"
+        android:padding="12dp"
+        android:text="ลบ"
+        android:textColor="#fff"
+        android:textSize="24dp" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/id_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:hintTextAppearance="@android:style/TextAppearance.Medium"
+        android:layout_below="@+id/id_title"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <EditText
+            android:id="@+id/txtprice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="ราคา"
+            android:inputType="numberDecimal"
+            android:singleLine="true" />
+
+    </android.support.design.widget.TextInputLayout>
+
+
+</RelativeLayout>

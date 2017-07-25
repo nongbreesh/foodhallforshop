@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:id="@+id/notif_view_order"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+    android:layout_height="wrap_content" >
+    <ImageView
+        android:layout_y="9dp"
+        android:layout_marginTop="10dp"
+        android:layout_height="20dp"
+        android:background="@drawable/ic_timelinebadge"
+        android:layout_width="20dp" />
+
+    <Button
+        android:id="@+id/notif_count_order"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:background="@drawable/shape_notification"
+        android:visibility="gone"
+        android:gravity="center"
+        android:padding="2dp"
+        android:singleLine="true"
+        android:text="0"
+        android:textColor="@android:color/white"
+        android:textSize="10sp"
+        android:layout_x="8dp"
+        android:layout_y="0dp"></Button>
+
+</AbsoluteLayout>

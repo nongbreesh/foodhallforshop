@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#FFF">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/profile_header_bg"
+        android:orientation="vertical"
+        android:paddingBottom="0dp">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+
+            <ImageView
+                android:id="@+id/circular_image_view"
+                android:layout_width="match_parent"
+                android:layout_height="215dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="15dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop" />
+            <TextView
+                android:background="@drawable/bg_radius"
+                android:id="@+id/editshopimg"
+                android:layout_margin="15dp"
+                android:layout_marginTop="40dp"
+                android:layout_gravity="top|right"
+                android:padding="8dp"
+                android:textSize="14dp"
+                android:layout_width="wrap_content"
+                android:text="แก้ไขรูป"
+                android:textColor="#000"
+                android:layout_height="wrap_content" />
+        </FrameLayout>
+
+        <!--<com.servewellsolution.app.bananaleaf.Helper.CircularImageView-->
+        <!--android:id="@+id/circular_image_view"-->
+        <!--android:layout_width="190dp"-->
+        <!--android:layout_height="190dp"-->
+        <!--android:layout_marginTop="30dp"-->
+        <!--android:layout_marginBottom="15dp"-->
+        <!--android:layout_gravity="center" />-->
+
+        <TextView
+            android:id="@+id/txtdesc_row1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="อาหารลดน้ำหนัก/อาหารคลีน"
+            android:layout_marginRight="12dp"
+            android:layout_marginLeft="12dp"
+            android:singleLine="true"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="22dp" />
+
+
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/sc_push"
+            style="@style/switchStyle"
+            theme="@style/switchStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:text="เปิด - ปิดร้าน  "
+            android:theme="@style/switchStyle" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

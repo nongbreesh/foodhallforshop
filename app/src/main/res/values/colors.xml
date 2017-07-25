@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#2ECC71</color>
+    <color name="colorPrimaryDark">#26b964</color>
+    <color name="colorFab">#F9BF3B</color>
+    <color name="colorAccent">#023317</color>
+    <color name="padcolor">#ffffff</color>
+    <color name="tempimg">#e4e4e4</color>
+    <color name="overlaycolor">#59f00000</color>
+
+</resources>

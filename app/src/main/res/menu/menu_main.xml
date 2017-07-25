@@ -1,0 +1,35 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.servewellsolution.app.bananaleaf.MainActivity">
+    <item
+        android:id="@+id/badge"
+        android:actionLayout="@layout/activity_main"
+        android:title="badge"
+        android:icon="@drawable/ic_notification"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/badgeorder"
+        android:actionLayout="@layout/activity_main"
+        android:title="badge"
+        android:icon="@drawable/ic_delivery"
+        app:showAsAction="always" />
+    <!--<item-->
+        <!--android:id="@+id/action_add"-->
+        <!--android:orderInCategory="100"-->
+        <!--android:title="@string/action_add"-->
+        <!--android:icon="@drawable/ic_add"-->
+        <!--app:showAsAction="ifRoom" />-->
+    <!--<item-->
+        <!--android:id="@+id/action_search"-->
+        <!--android:orderInCategory="100"-->
+        <!--android:title="@string/action_search"-->
+        <!--android:icon="@drawable/ic_search"-->
+        <!--app:showAsAction="ifRoom" />-->
+    <!--<item-->
+        <!--android:id="@+id/action_more"-->
+        <!--android:orderInCategory="100"-->
+        <!--android:title="@string/action_more"-->
+        <!--android:icon="@drawable/ic_more"-->
+        <!--app:showAsAction="ifRoom" />-->
+</menu>
