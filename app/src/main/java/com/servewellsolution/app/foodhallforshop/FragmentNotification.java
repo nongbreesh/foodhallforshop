@@ -1,4 +1,4 @@
-package com.servewellsolution.app.bananaleaf;
+package com.servewellsolution.app.foodhallforshop;
 
 import android.app.Activity;
 import android.content.Context;
@@ -20,8 +20,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.servewellsolution.app.bananaleaf.Adapter.ListItem;
-import com.servewellsolution.app.bananaleaf.Helper.DatetimeHelper;
+import com.servewellsolution.app.foodhallforshop.Adapter.ListItem;
+import com.servewellsolution.app.foodhallforshop.Helper.DatetimeHelper;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -42,7 +42,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import static com.servewellsolution.app.bananaleaf.SessionManagement.KEY_SHOPID;
+import static com.servewellsolution.app.foodhallforshop.SessionManagement.KEY_SHOPID;
 
 /**
  * Created by Breeshy on 9/4/2016 AD.

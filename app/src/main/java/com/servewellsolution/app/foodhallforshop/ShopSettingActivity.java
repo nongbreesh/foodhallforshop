@@ -1,4 +1,4 @@
-package com.servewellsolution.app.bananaleaf;
+package com.servewellsolution.app.foodhallforshop;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -48,14 +48,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import static com.servewellsolution.app.bananaleaf.SessionManagement.KEY_MINPRICE;
-import static com.servewellsolution.app.bananaleaf.SessionManagement.KEY_ORDERTIME;
-import static com.servewellsolution.app.bananaleaf.SessionManagement.KEY_SHOPID;
-import static com.servewellsolution.app.bananaleaf.SessionManagement.KEY_SHOPLAT;
-import static com.servewellsolution.app.bananaleaf.SessionManagement.KEY_SHOPLNG;
-import static com.servewellsolution.app.bananaleaf.SessionManagement.KEY_SHOPNAME;
-import static com.servewellsolution.app.bananaleaf.SessionManagement.KEY_SHOPRADIUS;
-import static com.servewellsolution.app.bananaleaf.SessionManagement.PREF_NAME;
+import static com.servewellsolution.app.foodhallforshop.SessionManagement.KEY_MINPRICE;
+import static com.servewellsolution.app.foodhallforshop.SessionManagement.KEY_ORDERTIME;
+import static com.servewellsolution.app.foodhallforshop.SessionManagement.KEY_SHOPID;
+import static com.servewellsolution.app.foodhallforshop.SessionManagement.KEY_SHOPLAT;
+import static com.servewellsolution.app.foodhallforshop.SessionManagement.KEY_SHOPLNG;
+import static com.servewellsolution.app.foodhallforshop.SessionManagement.KEY_SHOPNAME;
+import static com.servewellsolution.app.foodhallforshop.SessionManagement.KEY_SHOPRADIUS;
+import static com.servewellsolution.app.foodhallforshop.SessionManagement.PREF_NAME;
 
 public class ShopSettingActivity extends AppCompatActivity implements OnMapReadyCallback {
     private static float radius = 0;
@@ -216,7 +216,7 @@ public class ShopSettingActivity extends AppCompatActivity implements OnMapReady
                 editor.putString(KEY_SHOPNAME, txtshopname.getText().toString());
                 editor.apply();
 
-                dialog.hide();
+                dialog.dismiss();
 
 
                 setResult(RESULT_OK);
@@ -266,14 +266,14 @@ public class ShopSettingActivity extends AppCompatActivity implements OnMapReady
         } catch (ClientProtocolException e) {
             // TODO Auto-generated catch block
             Toast.makeText(getBaseContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-            dialog.hide();
+            dialog.dismiss();
         } catch (IOException e) {
             // TODO Auto-generated catch block
             Toast.makeText(getBaseContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-            dialog.hide();
+            dialog.dismiss();
         } catch (JSONException e) {
             e.printStackTrace();
-            dialog.hide();
+            dialog.dismiss();
         }
     }
 

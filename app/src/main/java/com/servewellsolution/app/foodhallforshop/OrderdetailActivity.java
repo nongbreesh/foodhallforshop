@@ -1,4 +1,4 @@
-package com.servewellsolution.app.bananaleaf;
+package com.servewellsolution.app.foodhallforshop;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -6,9 +6,11 @@ import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -32,9 +34,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
-import com.servewellsolution.app.bananaleaf.Adapter.ListItem;
-import com.servewellsolution.app.bananaleaf.Adapter.incommingorder_list_adpt;
-import com.servewellsolution.app.bananaleaf.Helper.DatetimeHelper;
+import com.servewellsolution.app.foodhallforshop.Adapter.ListItem;
+import com.servewellsolution.app.foodhallforshop.Adapter.incommingorder_list_adpt;
+import com.servewellsolution.app.foodhallforshop.Helper.DatetimeHelper;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -56,12 +58,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import static com.servewellsolution.app.bananaleaf.SessionManagement.KEY_ORDERTIME;
-import static com.servewellsolution.app.bananaleaf.SessionManagement.KEY_SHOPID;
-import static com.servewellsolution.app.bananaleaf.SessionManagement.PREF_NAME;
+import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.EasyPermissions;
 
-public class OrderdetailActivity extends AppCompatActivity implements OnMapReadyCallback {
+import static com.servewellsolution.app.foodhallforshop.SessionManagement.KEY_ORDERTIME;
+import static com.servewellsolution.app.foodhallforshop.SessionManagement.KEY_SHOPID;
+import static com.servewellsolution.app.foodhallforshop.SessionManagement.PREF_NAME;
 
+public class OrderdetailActivity extends AppCompatActivity implements OnMapReadyCallback, EasyPermissions.PermissionCallbacks {
+
+    private static final int LOCATION = 1;
     private GoogleMap gmap;
     private static Double lat;
     private static Double lng;
@@ -207,10 +213,9 @@ public class OrderdetailActivity extends AppCompatActivity implements OnMapReady
 
         this.setTitle("Order #" + orderno);
 
-        if(!fullname.equals("0")){
+        if (!fullname.equals("0")) {
             txtname.setText("ชื่อผู้สั่ง : " + fullname);
-        }
-        else{
+        } else {
             txtname.setText("อีเมลล์ : " + email);
         }
 
@@ -257,15 +262,12 @@ public class OrderdetailActivity extends AppCompatActivity implements OnMapReady
         incommingorder_list.setAdapter(incomminglist_adpt);
 
 
-
         txt_ordertime.setText("เวลาสั่ง " + DatetimeHelper.convertDate(ordertime));
-        if(!deriveryrange.equals("")){
-            txt_deliverytime.setText("เวลาส่ง " + DatetimeHelper.convertDate2(deliverytime)+ " เวลา " + deriveryrange);
-        }
-        else{
+        if (!deriveryrange.equals("")) {
+            txt_deliverytime.setText("เวลาส่ง " + DatetimeHelper.convertDate2(deliverytime) + " เวลา " + deriveryrange);
+        } else {
             txt_deliverytime.setText("เวลาส่ง " + DatetimeHelper.convertDate(deliverytime));
         }
-
 
 
     }
@@ -424,10 +426,31 @@ public class OrderdetailActivity extends AppCompatActivity implements OnMapReady
 
     }
 
+
+    @AfterPermissionGranted(LOCATION)
+    private boolean methodRequiresTwoPermission() {
+        String[] perms = {android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION};
+        if (EasyPermissions.hasPermissions(this, perms)) {
+            return true;
+        } else {
+            // Do not have permissions, request them now
+            EasyPermissions.requestPermissions(this, "",
+                    LOCATION, perms);
+        }
+        return false;
+    }
+
+
     @Override
     public void onMapReady(GoogleMap map) {
         gmap = map;
-        gmap.setMyLocationEnabled(true);
+
+
+        if (methodRequiresTwoPermission()) {
+            //gmap.setMyLocationEnabled(true);
+        }
+
+
         gmap.getUiSettings().setScrollGesturesEnabled(false);
         gmarker = gmap.addMarker(new MarkerOptions()
                 .position(new LatLng(lat, lng))
@@ -446,4 +469,13 @@ public class OrderdetailActivity extends AppCompatActivity implements OnMapReady
     }
 
 
+    @Override
+    public void onPermissionsGranted(int requestCode, List<String> perms) {
+
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, List<String> perms) {
+
+    }
 }

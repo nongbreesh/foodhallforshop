@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.servewellsolution.app.bananaleaf.MainActivity">
+    tools:context="com.servewellsolution.app.foodhallforshop.MainActivity">
     <item
         android:id="@+id/phonecall"
         android:actionLayout="@layout/activity_main"

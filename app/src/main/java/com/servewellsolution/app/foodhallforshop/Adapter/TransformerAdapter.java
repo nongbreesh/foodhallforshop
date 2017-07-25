@@ -1,4 +1,4 @@
-package com.servewellsolution.app.bananaleaf.Adapter;
+package com.servewellsolution.app.foodhallforshop.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.daimajia.slider.library.SliderLayout;
-import com.servewellsolution.app.bananaleaf.R;
+import com.servewellsolution.app.foodhallforshop.R;
 
 /**
  * Created by daimajia on 14-5-29.

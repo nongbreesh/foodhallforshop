@@ -1,4 +1,4 @@
-package com.servewellsolution.app.bananaleaf;
+package com.servewellsolution.app.foodhallforshop;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -31,6 +31,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsoluteLayout;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -67,10 +68,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import static com.servewellsolution.app.bananaleaf.SessionManagement.KEY_SHOPID;
-import static com.servewellsolution.app.bananaleaf.SessionManagement.KEY_SHOPIMG;
-import static com.servewellsolution.app.bananaleaf.SessionManagement.KEY_USERID;
-import static com.servewellsolution.app.bananaleaf.SessionManagement.PREF_NAME;
+import static com.servewellsolution.app.foodhallforshop.SessionManagement.KEY_SHOPID;
+import static com.servewellsolution.app.foodhallforshop.SessionManagement.KEY_SHOPIMG;
+import static com.servewellsolution.app.foodhallforshop.SessionManagement.KEY_USERID;
+import static com.servewellsolution.app.foodhallforshop.SessionManagement.PREF_NAME;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -107,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
     private int neworder = 0;
     private int delivery = 0;
     private static final String TAG = "MainActivity";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -195,6 +197,8 @@ public class MainActivity extends AppCompatActivity {
         editor = pref.edit();
 
     }
+
+
 
     private Boolean exit = false;
 

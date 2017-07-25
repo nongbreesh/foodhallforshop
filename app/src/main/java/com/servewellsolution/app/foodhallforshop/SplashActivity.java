@@ -1,12 +1,12 @@
-package com.servewellsolution.app.bananaleaf;
+package com.servewellsolution.app.foodhallforshop;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import static com.servewellsolution.app.bananaleaf.SessionManagement.IS_LOGIN;
-import static com.servewellsolution.app.bananaleaf.SessionManagement.PREF_NAME;
+import static com.servewellsolution.app.foodhallforshop.SessionManagement.IS_LOGIN;
+import static com.servewellsolution.app.foodhallforshop.SessionManagement.PREF_NAME;
 
 /**
  * Created by Breeshy on 8/23/2016 AD.

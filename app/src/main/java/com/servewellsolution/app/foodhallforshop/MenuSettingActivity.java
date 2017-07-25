@@ -1,4 +1,4 @@
-package com.servewellsolution.app.bananaleaf;
+package com.servewellsolution.app.foodhallforshop;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -6,8 +6,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -15,6 +18,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
@@ -24,7 +29,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.servewellsolution.app.bananaleaf.Adapter.ListItem;
+import com.servewellsolution.app.foodhallforshop.Adapter.ListItem;
 import com.squareup.picasso.Picasso;
 
 import org.apache.http.HttpResponse;
@@ -46,7 +51,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import static com.servewellsolution.app.bananaleaf.SessionManagement.KEY_SHOPID;
+import static com.servewellsolution.app.foodhallforshop.SessionManagement.KEY_SHOPID;
 
 public class MenuSettingActivity extends AppCompatActivity {
 
@@ -61,6 +66,7 @@ public class MenuSettingActivity extends AppCompatActivity {
     private SharedPreferences.Editor editor;
     private HashMap<String, String> userdetail;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -125,6 +131,17 @@ public class MenuSettingActivity extends AppCompatActivity {
             }
         });
 
+
+        Window window = this.getWindow();
+        // clear FLAG_TRANSLUCENT_STATUS flag:
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+// add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+// finally change the color
+        window.setStatusBarColor(ContextCompat.getColor(this,R.color.colorPrimaryDark));
+
         this.firstload();
     }
 
@@ -143,7 +160,7 @@ public class MenuSettingActivity extends AppCompatActivity {
                         firstload();
 
 
-                        progress.hide();
+                        progress.dismiss();
                         break;
                 }
             }
@@ -192,7 +209,7 @@ public class MenuSettingActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(Void result) {
                 bindList();
-                progress.hide();
+                progress.dismiss();
             }
 
         };

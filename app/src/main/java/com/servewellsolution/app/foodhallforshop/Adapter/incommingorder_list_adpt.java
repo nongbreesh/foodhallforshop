@@ -1,4 +1,4 @@
-package com.servewellsolution.app.bananaleaf.Adapter;
+package com.servewellsolution.app.foodhallforshop.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,7 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.servewellsolution.app.bananaleaf.R;
+import com.servewellsolution.app.foodhallforshop.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;

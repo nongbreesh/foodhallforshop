@@ -1,4 +1,4 @@
-package com.servewellsolution.app.bananaleaf;
+package com.servewellsolution.app.foodhallforshop;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -21,7 +21,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.servewellsolution.app.bananaleaf.Adapter.ListItem;
+import com.servewellsolution.app.foodhallforshop.Adapter.ListItem;
 import com.soundcloud.android.crop.Crop;
 import com.squareup.picasso.Picasso;
 
@@ -44,7 +44,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 
-import static com.servewellsolution.app.bananaleaf.SessionManagement.KEY_SHOPID;
+import static com.servewellsolution.app.foodhallforshop.SessionManagement.KEY_SHOPID;
 
 public class InputMenu extends AppCompatActivity {
     EditText txttitle;

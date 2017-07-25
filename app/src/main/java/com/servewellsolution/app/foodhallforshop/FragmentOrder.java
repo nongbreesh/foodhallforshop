@@ -1,4 +1,4 @@
-package com.servewellsolution.app.bananaleaf;
+package com.servewellsolution.app.foodhallforshop;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -27,9 +27,9 @@ import com.daimajia.slider.library.SliderLayout;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
-import com.servewellsolution.app.bananaleaf.Adapter.ListItem;
-import com.servewellsolution.app.bananaleaf.Adapter.incommingorder_list_adpt;
-import com.servewellsolution.app.bananaleaf.Helper.DatetimeHelper;
+import com.servewellsolution.app.foodhallforshop.Adapter.ListItem;
+import com.servewellsolution.app.foodhallforshop.Adapter.incommingorder_list_adpt;
+import com.servewellsolution.app.foodhallforshop.Helper.DatetimeHelper;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -51,8 +51,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import static com.servewellsolution.app.bananaleaf.SessionManagement.KEY_ORDERTIME;
-import static com.servewellsolution.app.bananaleaf.SessionManagement.KEY_SHOPID;
+import static com.servewellsolution.app.foodhallforshop.SessionManagement.KEY_ORDERTIME;
+import static com.servewellsolution.app.foodhallforshop.SessionManagement.KEY_SHOPID;
 
 /**
  * Created by Breeshy on 4/11/2016 AD.
@@ -231,7 +231,6 @@ public class FragmentOrder extends Fragment {
                     map.put(ListItem.KEY_ORDERDERIVERYRANGE, deriveryrange);
 
 
-
                     map.put("fullname", fullname);
                     map.put("tel", tel);
                     map.put("email", email);
@@ -365,6 +364,7 @@ class TimelineAdapter extends BaseAdapter {
         btn_accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sList = new ArrayList<HashMap<String, String>>();
                 acceptorder();
             }
         });
@@ -377,6 +377,7 @@ class TimelineAdapter extends BaseAdapter {
 
                 alert.setPositiveButton("ยืนยัน", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
+                        sList = new ArrayList<HashMap<String, String>>();
                         rejectorder();
                     }
                 });
@@ -496,7 +497,7 @@ class TimelineAdapter extends BaseAdapter {
             final JSONObject jsonObj = new JSONObject(s.toString());
             Log.d("accept", String.valueOf(s));
             if (!jsonObj.get("result").toString().equals("")) {
-                JSONObject obj =   (JSONObject)jsonObj.get("result");
+                JSONObject obj = (JSONObject) jsonObj.get("result");
                 String buyeruserid = (String) obj.get("buyeruserid");
                 DatabaseReference dbRef = database.getReference("buyerusers");
                 dbRef.child(buyeruserid).child("updatedate").setValue(ServerValue.TIMESTAMP);
@@ -571,14 +572,13 @@ class TimelineAdapter extends BaseAdapter {
             final JSONObject jsonObj = new JSONObject(s.toString());
 
             if (!jsonObj.get("result").toString().equals("")) {
-                JSONObject obj =   (JSONObject)jsonObj.get("result");
+                JSONObject obj = (JSONObject) jsonObj.get("result");
                 String buyeruserid = (String) obj.get("buyeruserid");
                 DatabaseReference dbRef = database.getReference("buyerusers");
                 dbRef.child(buyeruserid).child("updatedate").setValue(ServerValue.TIMESTAMP);
                 dbRef = database.getReference("shops");
                 dbRef.child(userdetail.get(KEY_SHOPID)).child("updatedate").setValue(ServerValue.TIMESTAMP);
             }
-
 
 
         } catch (ClientProtocolException e) {

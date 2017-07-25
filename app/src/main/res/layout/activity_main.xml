@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.servewellsolution.app.bananaleaf.MainActivity">
+    tools:context="com.servewellsolution.app.foodhallforshop.MainActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
@@ -26,7 +26,8 @@
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textAlignment="center" />
 
     </android.support.design.widget.AppBarLayout>
 
@@ -42,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="@dimen/fab_margin"
-        app:backgroundTint="@color/colorFab"
-        android:src="@drawable/ic_delivery" />
+        android:src="@drawable/ic_delivery"
+        app:backgroundTint="@color/colorFab" />
 
 </android.support.design.widget.CoordinatorLayout>

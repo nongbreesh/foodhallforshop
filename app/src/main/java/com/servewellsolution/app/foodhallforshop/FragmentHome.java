@@ -1,4 +1,4 @@
-package com.servewellsolution.app.bananaleaf;
+package com.servewellsolution.app.foodhallforshop;
 
 import android.app.Activity;
 import android.content.Context;
@@ -16,11 +16,12 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.servewellsolution.app.bananaleaf.Adapter.ListItem;
+import com.servewellsolution.app.foodhallforshop.Adapter.ListItem;
 import com.squareup.picasso.Picasso;
 
 import org.apache.http.HttpResponse;
@@ -42,10 +43,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import static com.servewellsolution.app.bananaleaf.SessionManagement.KEY_SHOPID;
-import static com.servewellsolution.app.bananaleaf.SessionManagement.KEY_SHOPIMG;
-import static com.servewellsolution.app.bananaleaf.SessionManagement.KEY_SHOPNAME;
-import static com.servewellsolution.app.bananaleaf.SessionManagement.PREF_NAME;
+import static com.servewellsolution.app.foodhallforshop.SessionManagement.KEY_SHOPID;
+import static com.servewellsolution.app.foodhallforshop.SessionManagement.KEY_SHOPIMG;
+import static com.servewellsolution.app.foodhallforshop.SessionManagement.KEY_SHOPNAME;
+import static com.servewellsolution.app.foodhallforshop.SessionManagement.PREF_NAME;
 
 /**
  * Created by Breeshy on 4/11/2016 AD.
@@ -61,6 +62,7 @@ public class FragmentHome extends Fragment {
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private SharedPreferences.Editor editor;
     private HashMap<String, String> userdetail;
+    private LinearLayout linlaHeaderProgress;
  ;
 
     public FragmentHome() {
@@ -85,6 +87,10 @@ public class FragmentHome extends Fragment {
         editor = pref.edit();
         this.setting();
         this.listview = (ListView) rootView.findViewById(R.id.listView);
+        // CAST THE LINEARLAYOUT HOLDING THE MAIN PROGRESS (SPINNER)
+        this.linlaHeaderProgress = (LinearLayout) rootView.findViewById(R.id.linlaHeaderProgress);
+
+
         this.mSwipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.activity_main_swipe_refresh_layout);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             public void onRefresh() {
@@ -114,6 +120,7 @@ public class FragmentHome extends Fragment {
         Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.abc_fade_in);
         this.listview.startAnimation(animation);
         this.listview.setAdapter(this.listAdpt);
+        this.linlaHeaderProgress.setVisibility(View.GONE);
 
     }
 
@@ -122,6 +129,7 @@ public class FragmentHome extends Fragment {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
+                linlaHeaderProgress.setVisibility(View.VISIBLE);
                 sList = new ArrayList<HashMap<String, String>>();
             }
 

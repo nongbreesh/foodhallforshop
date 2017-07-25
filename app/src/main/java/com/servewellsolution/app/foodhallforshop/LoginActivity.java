@@ -1,4 +1,4 @@
-package com.servewellsolution.app.bananaleaf;
+package com.servewellsolution.app.foodhallforshop;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -34,8 +34,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.servewellsolution.app.bananaleaf.SessionManagement.*;
-import static com.servewellsolution.app.bananaleaf.SessionManagement.PREF_NAME;
+import static com.servewellsolution.app.foodhallforshop.SessionManagement.*;
+import static com.servewellsolution.app.foodhallforshop.SessionManagement.PREF_NAME;
 
 /**
  * Created by Breeshy on 8/23/2016 AD.
@@ -102,7 +102,6 @@ public class LoginActivity extends Activity {
                     dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                     dialog.show();
 
-
                     // Create a new HttpClient and Post Header
                     HttpClient httpclient = new DefaultHttpClient();
                     HttpPost httppost = new HttpPost(getString(R.string.apiaddress) + "api/user_login");
@@ -151,14 +150,14 @@ public class LoginActivity extends Activity {
                                         editor.putString(KEY_SHOPID, obj.get("shopid").toString());
 
                                         editor.commit();
-                                        dialog.hide();
                                     } catch (JSONException e) {
-                                        dialog.hide();
+                                        dialog.dismiss();
                                         e.printStackTrace();
                                     }
                                     new Handler().postDelayed(new Runnable() {
                                         @Override
                                         public void run() {
+                                            dialog.dismiss();
                                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                             startActivity(intent);
@@ -168,7 +167,6 @@ public class LoginActivity extends Activity {
                             }, 3 * 1000);
 
                         } else {
-                            dialog.hide();
                             Toast.makeText(getBaseContext(), "อีเมลล์หรือรหัสผ่านไม่ถูกต้อง", Toast.LENGTH_SHORT).show();
                         }
 

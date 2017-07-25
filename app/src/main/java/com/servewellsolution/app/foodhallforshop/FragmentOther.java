@@ -1,4 +1,4 @@
-package com.servewellsolution.app.bananaleaf;
+package com.servewellsolution.app.foodhallforshop;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -30,7 +30,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.servewellsolution.app.bananaleaf.Adapter.ListItem;
+import com.servewellsolution.app.foodhallforshop.Adapter.ListItem;
 import com.soundcloud.android.crop.Crop;
 import com.squareup.picasso.Picasso;
 
@@ -54,20 +54,20 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import static com.servewellsolution.app.bananaleaf.SessionManagement.KEY_APPROVE;
-import static com.servewellsolution.app.bananaleaf.SessionManagement.KEY_ISSHOPOPEN;
-import static com.servewellsolution.app.bananaleaf.SessionManagement.KEY_MINAMOUNT;
-import static com.servewellsolution.app.bananaleaf.SessionManagement.KEY_MINPRICE;
-import static com.servewellsolution.app.bananaleaf.SessionManagement.KEY_ORDERTIME;
-import static com.servewellsolution.app.bananaleaf.SessionManagement.KEY_SHOPID;
-import static com.servewellsolution.app.bananaleaf.SessionManagement.KEY_SHOPIMG;
-import static com.servewellsolution.app.bananaleaf.SessionManagement.KEY_SHOPLAT;
-import static com.servewellsolution.app.bananaleaf.SessionManagement.KEY_SHOPLNG;
-import static com.servewellsolution.app.bananaleaf.SessionManagement.KEY_SHOPNAME;
-import static com.servewellsolution.app.bananaleaf.SessionManagement.KEY_SHOPRADIUS;
-import static com.servewellsolution.app.bananaleaf.SessionManagement.KEY_USERID;
-import static com.servewellsolution.app.bananaleaf.SessionManagement.KEY_USERNAME;
-import static com.servewellsolution.app.bananaleaf.SessionManagement.PREF_NAME;
+import static com.servewellsolution.app.foodhallforshop.SessionManagement.KEY_APPROVE;
+import static com.servewellsolution.app.foodhallforshop.SessionManagement.KEY_ISSHOPOPEN;
+import static com.servewellsolution.app.foodhallforshop.SessionManagement.KEY_MINAMOUNT;
+import static com.servewellsolution.app.foodhallforshop.SessionManagement.KEY_MINPRICE;
+import static com.servewellsolution.app.foodhallforshop.SessionManagement.KEY_ORDERTIME;
+import static com.servewellsolution.app.foodhallforshop.SessionManagement.KEY_SHOPID;
+import static com.servewellsolution.app.foodhallforshop.SessionManagement.KEY_SHOPIMG;
+import static com.servewellsolution.app.foodhallforshop.SessionManagement.KEY_SHOPLAT;
+import static com.servewellsolution.app.foodhallforshop.SessionManagement.KEY_SHOPLNG;
+import static com.servewellsolution.app.foodhallforshop.SessionManagement.KEY_SHOPNAME;
+import static com.servewellsolution.app.foodhallforshop.SessionManagement.KEY_SHOPRADIUS;
+import static com.servewellsolution.app.foodhallforshop.SessionManagement.KEY_USERID;
+import static com.servewellsolution.app.foodhallforshop.SessionManagement.KEY_USERNAME;
+import static com.servewellsolution.app.foodhallforshop.SessionManagement.PREF_NAME;
 
 
 /**

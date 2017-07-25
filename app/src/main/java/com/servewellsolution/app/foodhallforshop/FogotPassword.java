@@ -1,20 +1,15 @@
-package com.servewellsolution.app.bananaleaf;
+package com.servewellsolution.app.foodhallforshop;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.StrictMode;
 import android.support.v7.widget.Toolbar;
-import android.text.SpannableString;
-import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.http.HttpResponse;
@@ -35,16 +30,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Breeshy on 8/23/2016 AD.
+ * Created by Breeshy on 9/20/2016 AD.
  */
 
-public class RegisterActivity extends Activity {
+public class FogotPassword extends Activity {
     private ProgressDialog dialog;
     private AsyncTask<Void, Void, Void> task;
-    EditText txtpassword, txtpassword2;
     EditText txtemail;
-    EditText txttel;
-
     public final static boolean isValidEmail(CharSequence target) {
         if (target == null) {
             return false;
@@ -52,40 +44,22 @@ public class RegisterActivity extends Activity {
             return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
         }
     }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.register);
-        if (android.os.Build.VERSION.SDK_INT > 9) {
-            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);
-        }
+        setContentView(R.layout.fogotpassword);
         dialog = new ProgressDialog(this);
+        txtemail = (EditText) findViewById(R.id.txtemail);
+        Button id_submit_button = (Button) findViewById(R.id.id_submit_button);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-
-
-        TextView linkforogtpassword = (TextView) findViewById(R.id.linkforogtpassword);
-        SpannableString content = new SpannableString("ลืมรหัสผ่าน?");
-        content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
-        linkforogtpassword.setText(content);
-
-        linkforogtpassword.setOnClickListener(new View.OnClickListener() {
+        id_submit_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), FogotPassword.class);
-                startActivity(intent);
-            }
-        });
-
-        TextView linklogin = (TextView) findViewById(R.id.linklogin);
-        content = new SpannableString("ล๊อคอินเข้าสู่ระบบ");
-        content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
-        linklogin.setText(content);
-        linklogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
+                if (isValidEmail(txtemail.getText().toString())) {
+                    sendfogot();
+                } else {
+                    Toast.makeText(getBaseContext(), "กรุณากรอกอีเมลล์ให้ถูกต้อง", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -95,41 +69,9 @@ public class RegisterActivity extends Activity {
                 finish();
             }
         });
-
-
-        this.txtpassword = (EditText) findViewById(R.id.txtpassword);
-        this.txtpassword2 = (EditText) findViewById(R.id.txtpassword2);
-        this.txtemail = (EditText) findViewById(R.id.txtemail);
-        this.txttel = (EditText) findViewById(R.id.txttel);
-
-        Button id_submit_button = (Button) findViewById(R.id.id_submit_button);
-        id_submit_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!txtpassword.getText().toString().equals("")
-                        && !txtemail.getText().toString().equals("")
-                        && !txttel.getText().toString().equals("")) {
-
-
-                    if (isValidEmail(txtemail.getText().toString())) {
-                        if (txtpassword.getText().toString().equals(txtpassword2.getText().toString())) {
-                            registeruser();
-                        } else {
-                            Toast.makeText(getBaseContext(), "รหัสผ่านไม่ตรงกัน", Toast.LENGTH_SHORT).show();
-                        }
-                    } else {
-                        Toast.makeText(getBaseContext(), "กรุณากรอกอีเมลล์ให้ถูกต้อง", Toast.LENGTH_SHORT).show();
-                    }
-
-                } else {
-                    Toast.makeText(getBaseContext(), "กรุณากรอกข้อมูลให้ครบ", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-        });
     }
 
-    private void registeruser() {
+    private void sendfogot() {
         this.task = new AsyncTask<Void, Void, Void>() {
             @Override
             protected void onPreExecute() {
@@ -144,7 +86,7 @@ public class RegisterActivity extends Activity {
             @Override
             protected Void doInBackground(Void... arg0) {
                 try {
-                    register();
+                    fogot();
                 } catch (Throwable e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
@@ -156,7 +98,7 @@ public class RegisterActivity extends Activity {
             protected void onPostExecute(Void result) {
 
                 dialog.hide();
-                Toast.makeText(getBaseContext(), "สมัครสมาชิกเรียบร้อยแล้วกรุณาล๊อกอินเข้าสู่ระบบ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "ส่งรหัสผ่านใหม่ให้ทางอีเมลล์เรียบร้อยแล้ว กรุณาตรวจสอบ", Toast.LENGTH_SHORT).show();
 
                 new Handler().postDelayed(new Runnable() {
                     @Override
@@ -170,17 +112,13 @@ public class RegisterActivity extends Activity {
         this.task.execute((Void[]) null);
     }
 
-    private void register() {
-
-        // Create a new HttpClient and Post Header
+    private void fogot() {
         HttpClient httpclient = new DefaultHttpClient();
-        HttpPost httppost = new HttpPost(getString(R.string.apiaddress) + "api/user_register");
+        HttpPost httppost = new HttpPost(getString(R.string.apiaddress) + "api/user_forgotpassword");
 
         try {
             // Add your data
             List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-            nameValuePairs.add(new BasicNameValuePair("password", txtpassword.getText().toString().trim()));
-            nameValuePairs.add(new BasicNameValuePair("tel", txttel.getText().toString().trim()));
             nameValuePairs.add(new BasicNameValuePair("email", txtemail.getText().toString().trim()));
             httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
             // Execute HTTP Post Request
@@ -210,6 +148,4 @@ public class RegisterActivity extends Activity {
         }
 
     }
-
 }
-

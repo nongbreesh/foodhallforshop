@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.servewellsolution.app.bananaleaf">
+    package="com.servewellsolution.app.foodhallforshop">
 
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -36,7 +36,7 @@
             android:value="AIzaSyAoxA4WAWHBwhThKXDPbHf9qOOszI_aw8M" />
 
         <activity
-            android:name=".SplashActivity"
+            android:name="com.servewellsolution.app.foodhallforshop.SplashActivity"
             android:label="@string/app_name"
             android:noHistory="true">
             <intent-filter>
@@ -46,39 +46,39 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="com.servewellsolution.app.foodhallforshop.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".RegisterActivity"
+            android:name="com.servewellsolution.app.foodhallforshop.RegisterActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <!--<activity-->
         <!--android:name=".SplashActivity"-->
         <!--android:theme="@style/AppTheme.NoActionBar" />-->
-        <activity android:name=".LoginActivity" />
+        <activity android:name="com.servewellsolution.app.foodhallforshop.LoginActivity" />
         <activity
-            android:name=".OrderlistActivity"
+            android:name="com.servewellsolution.app.foodhallforshop.OrderlistActivity"
             android:label="@string/OrderlistActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".MenuSettingActivity"
+            android:name="com.servewellsolution.app.foodhallforshop.MenuSettingActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Mapsetting"
+            android:name="com.servewellsolution.app.foodhallforshop.Mapsetting"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".OrderdetailActivity" />
+        <activity android:name="com.servewellsolution.app.foodhallforshop.OrderdetailActivity" />
 
 
-        <activity android:name=".ShopSettingActivity" />
-        <activity android:name=".InputMenu" />
+        <activity android:name="com.servewellsolution.app.foodhallforshop.ShopSettingActivity" />
+        <activity android:name="com.servewellsolution.app.foodhallforshop.InputMenu" />
         <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
 
-        <activity android:name=".FogotPassword"  android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name="com.servewellsolution.app.foodhallforshop.FogotPassword"  android:theme="@style/AppTheme.NoActionBar" />
 
 
         <!-- [START firebase_service] -->
         <service
-            android:name=".Helper.MyFirebaseMessagingService">
+            android:name="com.servewellsolution.app.foodhallforshop.Helper.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
@@ -86,7 +86,7 @@
         <!-- [END firebase_service] -->
         <!-- [START firebase_iid_service] -->
         <service
-            android:name=".Helper.MyFirebaseInstanceIDService">
+            android:name="com.servewellsolution.app.foodhallforshop.Helper.MyFirebaseInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
             </intent-filter>

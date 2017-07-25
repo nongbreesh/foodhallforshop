@@ -1,4 +1,4 @@
-package com.servewellsolution.app.bananaleaf;
+package com.servewellsolution.app.foodhallforshop;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -6,7 +6,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -14,10 +17,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -27,8 +33,8 @@ import com.daimajia.slider.library.SliderLayout;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
-import com.servewellsolution.app.bananaleaf.Adapter.ListItem;
-import com.servewellsolution.app.bananaleaf.Helper.DatetimeHelper;
+import com.servewellsolution.app.foodhallforshop.Adapter.ListItem;
+import com.servewellsolution.app.foodhallforshop.Helper.DatetimeHelper;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -49,7 +55,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import static com.servewellsolution.app.bananaleaf.SessionManagement.KEY_SHOPID;
+import static com.servewellsolution.app.foodhallforshop.SessionManagement.KEY_SHOPID;
 
 public class OrderlistActivity extends AppCompatActivity {
 
@@ -59,16 +65,17 @@ public class OrderlistActivity extends AppCompatActivity {
     private OrderlistAdapter listAdpt;
     private ListView listview;
     private SwipeRefreshLayout mSwipeRefreshLayout;
-    RelativeLayout id_nothingmsg;
+    //RelativeLayout id_nothingmsg;
     private HashMap<String, String> userdetail;
     private String orderdetailjson;
-
+    private LinearLayout linlaHeaderProgress;
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.orderlist);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-
+        // CAST THE LINEARLAYOUT HOLDING THE MAIN PROGRESS (SPINNER)
         toolbar.setTitleTextColor(getResources().getColor(R.color.padcolor));
         setSupportActionBar(toolbar);
 
@@ -85,7 +92,8 @@ public class OrderlistActivity extends AppCompatActivity {
         });
 
 
-        this.id_nothingmsg = (RelativeLayout) this.findViewById(R.id.id_nothingmsg);
+        //this.id_nothingmsg = (RelativeLayout) this.findViewById(R.id.id_nothingmsg);
+        this.linlaHeaderProgress = (LinearLayout) this.findViewById(R.id.linlaHeaderProgress);
         SessionManagement sess = new SessionManagement(getBaseContext());
         this.userdetail = sess.getUserDetails();
         this.listview = (ListView) this.findViewById(R.id.listView);
@@ -99,6 +107,16 @@ public class OrderlistActivity extends AppCompatActivity {
         this.listview.setDivider(null);
         this.listview.setDividerHeight(0);
 
+        Window window = this.getWindow();
+
+// clear FLAG_TRANSLUCENT_STATUS flag:
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+// add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+// finally change the color
+        window.setStatusBarColor(ContextCompat.getColor(this,R.color.colorPrimaryDark));
 
         this.firstload();
 
@@ -106,15 +124,16 @@ public class OrderlistActivity extends AppCompatActivity {
     }
 
     private void bindList() {
-        if (this.sList.size() > 0) {
-            this.id_nothingmsg.setVisibility(View.GONE);
-        } else {
-            this.id_nothingmsg.setVisibility(View.VISIBLE);
-        }
+//        if (this.sList.size() > 0) {
+//            this.id_nothingmsg.setVisibility(View.GONE);
+//        } else {
+//            this.id_nothingmsg.setVisibility(View.VISIBLE);
+//        }
         this.listAdpt = new OrderlistAdapter(this, this.sList, this.userdetail, this);
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.abc_fade_in);
         this.listview.startAnimation(animation);
         this.listview.setAdapter(this.listAdpt);
+        this.linlaHeaderProgress.setVisibility(View.GONE);
     }
 
     public void refresh() {
@@ -128,6 +147,7 @@ public class OrderlistActivity extends AppCompatActivity {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
+                linlaHeaderProgress.setVisibility(View.VISIBLE);
             }
 
             @Override

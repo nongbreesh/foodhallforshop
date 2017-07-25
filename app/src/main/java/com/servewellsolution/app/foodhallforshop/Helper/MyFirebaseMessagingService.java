@@ -1,4 +1,4 @@
-package com.servewellsolution.app.bananaleaf.Helper;
+package com.servewellsolution.app.foodhallforshop.Helper;
 
 /**
  * Created by Breeshy on 9/5/2016 AD.
@@ -15,8 +15,8 @@ import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
-import com.servewellsolution.app.bananaleaf.MainActivity;
-import com.servewellsolution.app.bananaleaf.R;
+import com.servewellsolution.app.foodhallforshop.MainActivity;
+import com.servewellsolution.app.foodhallforshop.R;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
