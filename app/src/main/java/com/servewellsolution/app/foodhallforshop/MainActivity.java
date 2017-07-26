@@ -68,12 +68,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.EasyPermissions;
+
 import static com.servewellsolution.app.foodhallforshop.SessionManagement.KEY_SHOPID;
 import static com.servewellsolution.app.foodhallforshop.SessionManagement.KEY_SHOPIMG;
 import static com.servewellsolution.app.foodhallforshop.SessionManagement.KEY_USERID;
 import static com.servewellsolution.app.foodhallforshop.SessionManagement.PREF_NAME;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements EasyPermissions.PermissionCallbacks {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -88,6 +91,8 @@ public class MainActivity extends AppCompatActivity {
     /**
      * The {@link ViewPager} that will host the section contents.
      */
+    private static final int LOCATION = 1;
+    private static final int PHONE = 2;
     private ViewPager mViewPager;
     private TabLayout tabLayout;
     private FloatingActionButton fab;
@@ -195,6 +200,9 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences pref = this.getSharedPreferences(PREF_NAME, 0); // 0 - for private mode
         editor = pref.edit();
+
+        this.methodRequiresPhonePermission();
+        this.methodRequiresTwoPermission();
 
     }
 
@@ -304,9 +312,9 @@ public class MainActivity extends AppCompatActivity {
             protected void onPostExecute(Void result) {
                 setNotifCount_Order(neworder);
                 setNotifCount_Delivey(delivery);
-                if(timeline.isAdded()){
-                    timeline.refresh();
-                }
+//                if(timeline.isAdded()){
+//                    timeline.refresh();
+//                }
 
             }
 
@@ -415,9 +423,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 mViewPager.setCurrentItem(1);
-                if(timeline.isAdded()){
-                    timeline.refresh();
-                }
+//                if(timeline.isAdded()){
+//                    timeline.refresh();
+//                }
             }
         });
 
@@ -492,6 +500,44 @@ public class MainActivity extends AppCompatActivity {
 
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    @AfterPermissionGranted(PHONE)
+    private boolean methodRequiresPhonePermission() {
+        String[] perms = {android.Manifest.permission.CALL_PHONE};
+        if (EasyPermissions.hasPermissions(this, perms)) {
+            return true;
+        } else {
+            // Do not have permissions, request them now
+            EasyPermissions.requestPermissions(this, "Foodhall ขออนุญาติการใช้งานการโทรออก",
+                    PHONE, perms);
+        }
+        return false;
+    }
+
+
+    @AfterPermissionGranted(LOCATION)
+    private boolean methodRequiresTwoPermission() {
+        String[] perms = {android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION};
+        if (EasyPermissions.hasPermissions(this, perms)) {
+            return true;
+        } else {
+            // Do not have permissions, request them now
+            EasyPermissions.requestPermissions(this, "Foodhall ขออนุญาติการใช้งานการระบุตำแหน่ง",
+                    LOCATION, perms);
+        }
+        return false;
+    }
+
+    @Override
+    public void onPermissionsGranted(int requestCode, List<String> perms) {
+
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, List<String> perms) {
+
     }
 
 

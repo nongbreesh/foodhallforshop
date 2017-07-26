@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
@@ -139,16 +140,31 @@ public class FragmentOrder extends Fragment {
 
     public void refresh() {
         Log.d("reload", "reload");
-        sList = new ArrayList<HashMap<String, String>>();
-        firstload();
+        if (this.sList.size() > 0) {
+            sList = new ArrayList<HashMap<String, String>>();
+        }
+
+        Log.d("reload", sList + "");
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                firstload();
+            }
+        }, 1 * 5000);
+
     }
 
     private void firstload() {
+        Log.d("reload", "reload");
+        sList = new ArrayList<HashMap<String, String>>();
+
+
         this.task = new AsyncTask<Void, Void, Void>() {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                sList = new ArrayList<HashMap<String, String>>();
             }
 
             @Override
